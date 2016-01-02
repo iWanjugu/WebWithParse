@@ -16,6 +16,20 @@
   <div id="main">
     <h1>You're ready to use Parse!</h1>
 
+
+      <!--Creating form-->
+      <form id="post-form">
+          <p><input id="first-name" type="text"></p>
+          <p><input id="last-name" type="text"></p>
+          <p><input id="post-submit" type="submit"</p>
+      </form>
+
+
+
+
+
+<!--
+
     <p>Read the documentation and start building your JavaScript app:</p>
 
     <ul>
@@ -36,10 +50,43 @@
           testObject.save({foo: "bar"});
         </code>
     </div>
+
+
+
+-->
   </div>
+
+<!---------------------------------------------------------------->
 
   <script type="text/javascript">
     Parse.initialize("aTpDfm2mKBR2WZd66IP2pXuj4DRiWFHiSvE3eu1D", "H6ajYC8UnhjcOWmEG6ysdYHtVuC0yq6UisZnfuaB");
+
+      var Post = Parse.Object.extend("Post");
+
+      //USING JQUERY ON FORM WITH PARSE
+    //listening for the submit action on the form
+      $("#post-form").submit(function(event){
+          event.preventDefault(); //prevents browser from loading to another page or refreshing; javascript will run in the background
+
+          var firstname = $("#first-name").val(); //'val' fxn - gets what has been typed into the field (content) in the form
+          var lastname = $("#last-name").val();
+
+          var newPost = new Post();
+          newPost.set("firstname", firstname);
+          newPost.set("lastname", lastname);
+
+          newPost.save({
+              success: function(){
+                  //if you want to do something after a sucess put here
+                  //e.g clear form fields, etc
+              },
+              error: function(error){
+                  console.log("Error:"+error.message);
+              }
+          });
+
+
+      });
     
       //Creating a 'TestObject' class
     //    var TestObject = Parse.Object.extend("TestObject");
@@ -56,26 +103,26 @@
 
       // Creating new entries in the 'Post' class
 
-      // selecting class to be updated
-    var Post = Parse.Object.extend("Post");
-
-      // creating a new instance on the class called 'newPost'
-    var newPost = new Post();
-
-      // 'setting' or updating the attributes of the class ie firstname and lastname
-    newPost.set("firstname", "Susan");
-    newPost.set("lastname", "Wangeci");
-
-      //saving the new post
-      newPost.save({
-          // success function: for when the object is successfully created on Parse
-          success: function(){},
-
-          // when thee\re's an error an 'error' object is created.
-          error: function(error){
-              console.log("Error:"+error.message)
-          }
-      });
+    //      // selecting class to be updated
+    //    var Post = Parse.Object.extend("Post");
+    //
+    //      // creating a new instance on the class called 'newPost'
+    //    var newPost = new Post();
+    //
+    //      // 'setting' or updating the attributes of the class ie firstname and lastname
+    //    newPost.set("firstname", "Susan");
+    //    newPost.set("lastname", "Wangeci");
+    //
+    //      //saving the new post
+    //      newPost.save({
+    //          // success function: for when the object is successfully created on Parse
+    //          success: function(){},
+    //
+    //          // when thee\re's an error an 'error' object is created.
+    //          error: function(error){
+    //              console.log("Error:"+error.message)
+    //          }
+    //      });
 
 
   </script>
