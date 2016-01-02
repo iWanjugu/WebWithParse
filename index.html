@@ -41,16 +41,43 @@
   <script type="text/javascript">
     Parse.initialize("aTpDfm2mKBR2WZd66IP2pXuj4DRiWFHiSvE3eu1D", "H6ajYC8UnhjcOWmEG6ysdYHtVuC0yq6UisZnfuaB");
     
-    var TestObject = Parse.Object.extend("TestObject");
-    var testObject = new TestObject();
-      testObject.save({foo: "bar"}, {
-      success: function(object) {
-        $(".success").show();
-      },
-      error: function(model, error) {
-        $(".error").show();
-      }
-    });
+      //Creating a 'TestObject' class
+    //    var TestObject = Parse.Object.extend("TestObject");
+    //    var testObject = new TestObject();
+    //
+    //      testObject.save({foo: "bar"}, {
+    //      success: function(object) {
+    //        $(".success").show();
+    //      },
+    //      error: function(model, error) {
+    //        $(".error").show();
+    //      }
+    //    });
+
+      // Creating new entries in the 'Post' class
+
+      // selecting class to be updated
+    var Post = Parse.Object.extend("Post");
+
+      // creating a new instance on the class called 'newPost'
+    var newPost = new Post();
+
+      // 'setting' or updating the attributes of the class ie firstname and lastname
+    newPost.set("firstname", "Susan");
+    newPost.set("lastname", "Wangeci");
+
+      //saving the new post
+      newPost.save({
+          // success function: for when the object is successfully created on Parse
+          success: function(){},
+
+          // when thee\re's an error an 'error' object is created.
+          error: function(error){
+              console.log("Error:"+error.message)
+          }
+      });
+
+
   </script>
 </body>
 
